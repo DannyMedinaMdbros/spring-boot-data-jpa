@@ -8,3 +8,14 @@ services:
 
 #script:
   #  - docker run spring-boot-data-jpa
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "web-app"
+    env: "WebApp-env"
+    bucket_name: "elasticbeanstalk-us-east-2-457004394905"
+    bucket_path: "web-app"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY

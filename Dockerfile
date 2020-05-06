@@ -10,5 +10,5 @@ FROM java:8-jdk-alpine
 COPY --from=build home/app/target/web-app.jar usr/app/
 
 WORKDIR usr/app/
-
+EXPOSE 80
 ENTRYPOINT java -jar web-app.jar
