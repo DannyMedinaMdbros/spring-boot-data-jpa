@@ -3,8 +3,8 @@ sudo: required
 services:
     - docker
 
-before_install:
-    - docker build -t spring-boot-data-jpa -f Dockerfile .
+#before_install:
+#    - docker build -t spring-boot-data-jpa -f Dockerfile .
 
-script:
-    - docker run spring-boot-data-jpa
+#script:
+  #  - docker run spring-boot-data-jpa
