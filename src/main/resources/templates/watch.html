@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout/layout :: head" />
+
+<body>
+	<header th:replace="layout/layout :: header" />
+	<div class="container py-4">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${title}"></div>
+			<div class="card-body">
+				<ul>
+					<img th:if="${#strings.length(client.photo) > 0}" class="list-group-item" 
+						style="max-width: 25%;" th:src="@{'/uploads/' + ${client.photo}}" 
+						th:alt="${client.photo}">
+					<br/>
+					<li class="list-group-item" th:text="${client.firstName}"></li>
+					<li class="list-group-item" th:text="${client.lastName}"></li>
+					<li class="list-group-item" th:text="${client.email}"></li>
+					<li class="list-group-item" th:text="${client.createdDate}"></li>
+					<a class="btn btn-success btn-xs my-4" th:href="@{/bill/form/} + ${client.id}">Create Bill</a>
+					<div th:if="${#lists.isEmpty(client.bills)}" class="alert alert-info my-4" 
+						th:text="'No bills related with the client: ' + ${client.firstName} + ' ' + ${client.lastName}"></div>
+					<table th:if="${not #lists.isEmpty(client.bills)}"  class="table table-bordered table-striped my-4">
+						<thead class="thead-inverse">
+							<tr>
+								<th>folio</th>
+								<th>description</th>
+								<th>Date</th>
+								<th>total</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="bill: ${client.bills}">
+								<td th:text="${bill.id}"></td>
+								<td th:text="${bill.description}"></td>
+								<td th:text="${bill.createdDate}"></td>
+								<td th:text="${bill.total}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer" />
+</body>
